@@ -1,7 +1,11 @@
 library 'github.com/schottsfired/pipeline-libraries'
 pipeline {
 
-	agent docker
+	agent {
+          node {
+            label 'docker'
+          }
+	}	
 
 	options {
 		timestamps()

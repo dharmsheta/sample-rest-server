@@ -16,7 +16,6 @@ pipeline {
 		DOCKERHUB = credentials('dockerhub')
 		IMAGE_NAME = "dharmsheta/sample-rest-server"
 		IMAGE_TAG = dockerImageTag()
-		DOCKER_NETWORK = "cjt-network"
 	}
 
 	stages {

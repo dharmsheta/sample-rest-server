@@ -1,7 +1,7 @@
 library 'github.com/schottsfired/pipeline-libraries'
 pipeline {
 
-	agent any
+	agent docker
 
 	options {
 		timestamps()

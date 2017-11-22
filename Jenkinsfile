@@ -1,11 +1,7 @@
 library 'github.com/schottsfired/pipeline-libraries'
 pipeline {
 
-	agent {
-          node {
-            label 'docker-cloud'
-          }
-	}	
+	agent any
 
 	options {
 		timestamps()
@@ -16,14 +12,13 @@ pipeline {
 		DOCKERHUB = credentials('dockerhub')
 		IMAGE_NAME = "dharmsheta/sample-rest-server"
 		IMAGE_TAG = dockerImageTag()
+		DOCKER_NETWORK = "cjt-network"
 	}
 
 	stages {
 		stage('Build, Unit, Package') {
 			steps {
 				sh 'mvn clean package'
-				//work around for JENKINS-6268
-				sh "touch $WORKSPACE/target/surefire-reports/TEST-*.xml"
 				junit testResults: '**/target/surefire-reports/TEST-*.xml'
 				archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
 			}
